@@ -60,19 +60,13 @@ CREATE TABLE IF NOT EXISTS exhibit (
   PRIMARY KEY (idExhibit),
   CONSTRAINT idEnvironment
     FOREIGN KEY (idEnvironment)
-    REFERENCES environment (idEnvironment)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES environment (idEnvironment),
   CONSTRAINT employeeId
     FOREIGN KEY (employeeId)
-    REFERENCES employee (idEmployee)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES employee (idEmployee),
   CONSTRAINT idLocation
     FOREIGN KEY (idLocation)
-    REFERENCES location (idLocation)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES location (idLocation));
 
 
 -- -----------------------------------------------------
@@ -85,9 +79,7 @@ CREATE TABLE IF NOT EXISTS medicalHistory (
   PRIMARY KEY (idmedicalHistory),
   CONSTRAINT idVet
     FOREIGN KEY (idVet)
-    REFERENCES employee (idEmployee)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES employee (idEmployee));
 
 -- -----------------------------------------------------
 -- Table animal
@@ -102,19 +94,13 @@ CREATE TABLE IF NOT EXISTS animal (
   PRIMARY KEY (idAnimal),
   CONSTRAINT idSpeciesAn
     FOREIGN KEY (idSpeciesAn)
-    REFERENCES species (idSpecies)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES species (idSpecies),
   CONSTRAINT idMedicalHistoryAn
     FOREIGN KEY (idMedicalHistoryAn)
-    REFERENCES medicalHistory (idmedicalHistory)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES medicalHistory (idmedicalHistory),
   CONSTRAINT idExhibitAn
     FOREIGN KEY (idExhibitAn)
-    REFERENCES exhibit (idExhibit)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES exhibit (idExhibit));
 
 -- -----------------------------------------------------
 -- Table recomendations
@@ -126,7 +112,5 @@ CREATE TABLE IF NOT EXISTS recomendations (
   PRIMARY KEY (idrecomendation),
   CONSTRAINT idmedicalHistory
     FOREIGN KEY (idmedicalHistory)
-    REFERENCES medicalHistory (idmedicalHistory)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES medicalHistory (idmedicalHistory));
 
