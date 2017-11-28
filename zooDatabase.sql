@@ -8,9 +8,9 @@ USE zoo;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS environment (
   idEnvironment INT NOT NULL,
-  name VARCHAR(45) NULL,
-  temperature INT NULL,
-  foliage VARCHAR(45) NULL,
+  name VARCHAR(45),
+  temperature INT,
+  foliage VARCHAR(45),
   PRIMARY KEY (idEnvironment));
 
 -- -----------------------------------------------------
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS environment (
 CREATE TABLE IF NOT EXISTS species (
   idSpecies INT NOT NULL,
   diet VARCHAR(45) NULL,
-  preferredClimate VARCHAR(45) NULL,
+  preferredClimate VARCHAR(45),
   name VARCHAR(45) NOT NULL,
   PRIMARY KEY (idSpecies));
 
@@ -28,11 +28,10 @@ CREATE TABLE IF NOT EXISTS species (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS employee (
   idEmployee INT NOT NULL,
-  name VARCHAR(45) NULL,
-  salary INT NULL,
-  role ENUM('Manager', 'Keeper', 'Veterinarian') NULL,
-  PRIMARY KEY (idEmployee),
-  UNIQUE INDEX idEmployee_UNIQUE (idEmployee ASC));
+  name VARCHAR(45),
+  salary INT,
+  role ENUM('Manager', 'Keeper', 'Veterinarian'),
+  PRIMARY KEY (idEmployee);
 
 
 -- -----------------------------------------------------
@@ -41,8 +40,7 @@ CREATE TABLE IF NOT EXISTS employee (
 CREATE TABLE IF NOT EXISTS location (
   idLocation INT NOT NULL,
   name VARCHAR(45) NOT NULL,
-  PRIMARY KEY (idLocation),
-  UNIQUE INDEX name_UNIQUE (name ASC));
+  PRIMARY KEY (idLocation);
 
 
 -- -----------------------------------------------------
@@ -50,13 +48,13 @@ CREATE TABLE IF NOT EXISTS location (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS exhibit (
   idExhibit INT NOT NULL,
-  idEnvironment INT NULL,
-  openingTime DATE NULL,
-  closingTime DATE NULL,
+  idEnvironment INT,
+  openingTime DATE,
+  closingTime DATE,
   numOfAnimals INT NOT NULL,
-  employeeId INT NULL,
-  idLocation INT NULL,
-  description VARCHAR(45) NULL,
+  employeeId INT,
+  idLocation INT,
+  description VARCHAR(45),
   PRIMARY KEY (idExhibit),
   CONSTRAINT idEnvironment
     FOREIGN KEY (idEnvironment)
@@ -74,8 +72,8 @@ CREATE TABLE IF NOT EXISTS exhibit (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS medicalHistory (
   idmedicalHistory INT NOT NULL,
-  idVet INT NULL,
-  lastCheckUp DATE NULL,
+  idVet INT,
+  lastCheckUp DATE,
   PRIMARY KEY (idmedicalHistory),
   CONSTRAINT idVet
     FOREIGN KEY (idVet)
@@ -86,11 +84,11 @@ CREATE TABLE IF NOT EXISTS medicalHistory (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS animal (
   idAnimal INT NOT NULL,
-  idSpeciesAn INT NULL,
-  idMedicalHistoryAn INT NULL,
+  idSpeciesAn INT,
+  idMedicalHistoryAn INT,
   animalName VARCHAR(45) NOT NULL,
-  perfoms TINYINT NULL,
-  idExhibitAn INT NULL,
+  perfoms BOOLEAN,
+  idExhibitAn INT,
   PRIMARY KEY (idAnimal),
   CONSTRAINT idSpeciesAn
     FOREIGN KEY (idSpeciesAn)
@@ -107,8 +105,8 @@ CREATE TABLE IF NOT EXISTS animal (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS recomendations (
   idrecomendation INT NOT NULL,
-  idmedicalHistory INT NULL,
-  recomendation VARCHAR(45) NULL,
+  idmedicalHistory INT,
+  recomendation VARCHAR(45),
   PRIMARY KEY (idrecomendation),
   CONSTRAINT idmedicalHistory
     FOREIGN KEY (idmedicalHistory)
