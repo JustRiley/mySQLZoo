@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS species (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS employee (
   idEmployee INT NOT NULL,
-  name VARCHAR(45) NULL,
+  empName VARCHAR(45) NOT NULL,
   salary INT NULL,
   role ENUM('Manager', 'Keeper', 'Veterinarian') NULL,
   PRIMARY KEY (idEmployee),
@@ -52,10 +52,11 @@ CREATE TABLE IF NOT EXISTS location (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS exhibit (
   idExhibit INT NOT NULL,
+  exhibitName varchar(45) not null,
   idEnvironment INT NULL,
   openingTime DATE NULL,
   closingTime DATE NULL,
-  numOfAnimals INT NOT NULL,
+  numOfAnimals INT default 0,
   employeeId INT NULL,
   idLocation INT NULL,
   description VARCHAR(45) NULL,
@@ -135,5 +136,57 @@ DELIMITER ;
 
 
 -- -----------------------------------------------------
--- Supported Triggers 
+-- Insert new elements into tables
+-- -----------------------------------------------------
+drop procedure if exists addAnimal;
+
+DELIMITER // 
+
+create procedure addAnimal(
+idA int,
+aName varchar(45)
+)
+
+begin
+ insert into animal(idAnimal, animalName)
+ values (idA, aName);
+end //
+
+DELIMITER ;
+
+drop procedure if exists addExhibit;
+
+DELIMITER // 
+
+create procedure addExhibit(
+idE int,
+eName varchar(45)
+)
+
+begin
+ insert into exhibit(idExhibit, exhibitName)
+ values (idE, eName);
+end //
+
+DELIMITER ;
+
+
+drop procedure if exists addEmployee;
+
+DELIMITER // 
+
+create procedure addEmployee(
+idE int,
+eName varchar(45)
+)
+
+begin
+ insert into employee(idEmployee, empName)
+ values (idE, eName);
+end //
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- update Foreign key objects
 -- -----------------------------------------------------
