@@ -1,4 +1,6 @@
 ##Zoo database
+drop database if exists zoo;
+
 CREATE DATABASE zoo;
 
 USE zoo;
@@ -114,3 +116,24 @@ CREATE TABLE IF NOT EXISTS recomendations (
     FOREIGN KEY (idmedicalHistory)
     REFERENCES medicalHistory (idmedicalHistory));
 
+
+-- -----------------------------------------------------
+-- Procedures for reading operations
+-- -----------------------------------------------------
+drop procedure if exists getMedical;
+
+DELIMITER //
+
+create procedure getMedical()
+begin
+
+-- select 
+
+end //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Supported Triggers 
+-- -----------------------------------------------------
