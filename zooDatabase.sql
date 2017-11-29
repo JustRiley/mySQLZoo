@@ -118,21 +118,34 @@ CREATE TABLE IF NOT EXISTS recomendations (
 -- Procedures
 -- -----------------------------------------------------
 
-
 DELIMITER // 
 
 create procedure addEmployee(
-eName varchar(45)
+eName varchar(45), salary INT, role ENUM('Manager', 'Keeper', 'Veterinarian')
 )
 
 begin
- insert into employee(name)
- values (eName);
+ insert into employee(name, salary, role)
+ values (eName, salary, role);
 end //
 
 DELIMITER ;
 
 
+DELIMITER // 
+
+create procedure removeEmployee(
+eName varchar(45)
+)
+
+begin
+ DELETE FROM employee WHERE name LIKE eName;
+end //
+
+DELIMITER ;
+
+SELECT * FROM employee;
+CALL removeEmployee('Ted');
 -- -----------------------------------------------------
 -- Triggers
 -- -----------------------------------------------------
