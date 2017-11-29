@@ -15,6 +15,17 @@
         </div>
     </div>
 
+    <div ng-show="model.successMessageAnimal">
+        <div class="alert alert-success">
+            <strong>Success!</strong> Added {{model.animalName}} to the database.
+        </div>
+    </div>
+    <div ng-show="model.successMessageDelAnimal">
+        <div class="alert alert-danger">
+            <strong>Success!</strong> Removed {{model.delAnimalName}} from the database.
+        </div>
+    </div>
+
   <h1>Test</h1>
 
   <h3>For employee procedure</h3>
@@ -35,6 +46,35 @@
   <input type="text" ng-model="model.delEmployeeName" placeholder="Input employee name"
          ng-change="model.resetMessages()">
     <button class="btn btn-block btn-danger" ng-click="model.delEmployee()"> Remove</button>
+
+
+    <h3>For animal procedure</h3>
+    <form>
+        <label>Name: <input type="text" ng-change="model.resetMessages()"
+                            ng-model="model.animalName" /></label><br />
+        <label>Species Key: <input type="number" ng-change="model.resetMessages()"
+                                   ng-model="model.speciesKey" /></label><br />
+        <label>Medical History Key: <input type="number" ng-change="model.resetMessages()"
+                                           ng-model="model.medicalHistKey" /></label><br />
+        <label>Exhibit Key: <input type="number" ng-change="model.resetMessages()"
+                                   ng-model="model.exhibitKey" /></label><br />
+        <label>Performer? <input type="checkbox" ng-change="model.resetMessages()"
+                                 ng-model="model.animalPerform" /></label><br />
+
+    </form>
+    <button class="btn btn-block btn-primary" ng-click="model.addAnimal()"> Add</button>
+
+
+
+    <input type="text" ng-model="model.delAnimalName" placeholder="Input animal name"
+           ng-change="model.resetMessages()">
+    <button class="btn btn-block btn-danger" ng-click="model.delAnimal()"> Remove</button>
+
+
+
+
+
+
   <h3>For SELECT Query</h3>
   <input type="text" ng-model="model.queryType" placeholder="Input table name">
 

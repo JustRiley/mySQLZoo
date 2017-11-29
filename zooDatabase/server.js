@@ -73,6 +73,43 @@ app.post('/addEmployee', function (req, res) {
     });
 });
 
+app.post('/addAnimal', function (req, res) {
+    var name = req.body['name'];
+    var speciesKey = req.body['speciesKey'];
+    var medicalHistKey = req.body['medicalHistKey'];
+    var animalPerforms = req.body['animalPerforms'];
+    var exhibitKey = req.body['exhibitKey'];
+
+    var query = "CALL addAnimal('"+ name + "', "+ speciesKey + ", " + medicalHistKey +
+        ", " + exhibitKey + ", " + animalPerforms + ");";
+
+    con.query(String(query),function(err,rows){
+        //con.close();
+        if(!err) {
+            res.write("true");
+            res.end();
+        } else {
+            console.log("Query failed");
+        }
+    });
+});
+
+
+app.post('/delAnimal', function (req, res) {
+    var name = req.body['name'];
+    var query = "CALL removeAnimal('"+ name + "');";
+    con.query(String(query),function(err,rows){
+        //con.close();
+        if(!err) {
+            res.write("true");
+            res.end();
+        } else {
+            console.log("Query failed");
+        }
+    });
+});
+
+
 app.post('/delEmployee', function (req, res) {
     var name = req.body['name'];
     var query = "CALL removeEmployee('"+ name + "');";

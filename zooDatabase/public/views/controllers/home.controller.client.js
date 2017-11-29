@@ -16,12 +16,25 @@
         model.employeeRole = "";
         model.successMessageEmployee = false;
         model.successMessageDelEmployee = false;
+        model.successMessageAnimal = false;
+        model.successMessageDelAnimal = false;
+        model.animalName="";
+        model.speciesKey=0;
+        model.medicalHistKey=0;
+        model.animalPerform=false;
+        model.exhibitKey=0;
+
+        model.addAnimal = addAnimal;
+        model.delAnimal = delAnimal;
+        model.delAnimalName="";
 
 
 
         function resetMessages() {
             model.successMessageDelEmployee = false;
             model.successMessageEmployee = false;
+            model.successMessageAnimal = false;
+            model.successMessageDelAnimal = false;
         }
 
         function delEmployee() {
@@ -42,6 +55,31 @@
             $http.post('/addEmployee', postObj)
                 .then(function (success){
                     model.successMessageEmployee=success;
+                },function (error){
+                    alert("Connection Error");
+                });
+        }
+
+        function addAnimal() {
+            var postObj = {
+                name: model.animalName,
+                speciesKey: model.speciesKey,
+                medicalHistKey: model.medicalHistKey,
+                animalPerforms: model.animalPerform,
+                exhibitKey: model.exhibitKey};
+            $http.post('/addAnimal', postObj)
+                .then(function (success){
+                    model.successMessageAnimal=success;
+                },function (error){
+                    alert("Connection Error");
+                });
+        }
+
+        function delAnimal() {
+            var postObj = {name: model.delAnimalName};
+            $http.post('/delAnimal', postObj)
+                .then(function (success){
+                    model.successMessageDelAnimal=success;
                 },function (error){
                     alert("Connection Error");
                 });
