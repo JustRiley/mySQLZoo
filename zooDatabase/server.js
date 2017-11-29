@@ -26,53 +26,13 @@ app.use(require("express").static('data'));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "###",
+    password: "xci18783",
     database: "zoo"
 });
 
 
 app.get("/",function(req,res){
     res.sendFile(__dirname + '/index.html');
-});
-
-app.get('/get_data', function (req, res) {
-    var query="select * from exhibit";
-
-    con.query(String(query),function(err,rows){
-        //con.close();
-        if(!err) {
-            if(rows.length > 0){
-                res.write(JSON.stringify(rows));
-                res.end();
-            }else{
-                rows=[];
-                res.write(JSON.stringify(rows));
-                res.end();
-            }
-        } else {
-            console.log("Query failed");
-        }
-    });
-});
-
-app.get('/getAnimals', function (req, res) {
-    var query="select * from animal";
-
-    con.query(String(query),function(err,rows){
-        //con.close();
-        if(!err) {
-            if(rows.length > 0){
-                res.write(JSON.stringify(rows));
-                res.end();
-            }else{
-                rows=[];
-                res.write(JSON.stringify(rows));
-                res.end();
-            }
-        } else {
-            console.log("Query failed");
-        }
-    });
 });
 
 app.post('/get_data', function (req, res) {
