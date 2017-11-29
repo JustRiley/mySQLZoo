@@ -38,14 +38,14 @@
                     ng-model="model.employeeRole" value="Keeper" />Keeper</label>
       <label><input type="radio"  ng-change="model.resetMessages()"
                     ng-model="model.employeeRole" value="Veterinarian" />Veterinarian</label><br />
-  </form>
-    <button class="btn btn-block btn-primary" ng-click="model.addEmployee()"> Add</button>
+  </form><br />
+    <button class="btn btn-primary" ng-click="model.addEmployee()"> Add</button><br />
 
 
 
   <input type="text" ng-model="model.delEmployeeName" placeholder="Input employee name"
-         ng-change="model.resetMessages()">
-    <button class="btn btn-block btn-danger" ng-click="model.delEmployee()"> Remove</button>
+         ng-change="model.resetMessages()"><br />
+    <button class="btn btn-danger" ng-click="model.delEmployee()"> Remove</button>
 
 
     <h3>For animal procedure</h3>
@@ -61,24 +61,20 @@
         <label>Performer? <input type="checkbox" ng-change="model.resetMessages()"
                                  ng-model="model.animalPerform" /></label><br />
 
-    </form>
-    <button class="btn btn-block btn-primary" ng-click="model.addAnimal()"> Add</button>
+    </form><br />
+    <button class="btn btn-primary" ng-click="model.addAnimal()"> Add</button><br />
 
 
 
     <input type="text" ng-model="model.delAnimalName" placeholder="Input animal name"
-           ng-change="model.resetMessages()">
-    <button class="btn btn-block btn-danger" ng-click="model.delAnimal()"> Remove</button>
-
-
-
-
+           ng-change="model.resetMessages()"><br />
+    <button class="btn btn-danger" ng-click="model.delAnimal()"> Remove</button>
 
 
   <h3>For SELECT Query</h3>
-  <input type="text" ng-model="model.queryType" placeholder="Input table name">
+  <input type="text" ng-model="model.queryType" placeholder="Input table name"><br />
 
-  <button class="btn btn-block btn-primary" ng-click="model.postQuery()"> Get</button>
+  <button class="btn btn-primary" ng-click="model.postQuery()"> Get</button>
   <div class="rows">
     <div class="col-md-12">
       <div ng-repeat="data in model.data_server">
