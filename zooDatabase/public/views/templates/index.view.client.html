@@ -3,9 +3,40 @@
 </head>
 <body>
 <div class="container-fluid">
+
+    <div ng-show="model.successMessageEmployee">
+        <div class="alert alert-success">
+            <strong>Success!</strong> Added {{model.employeeName}} to the database.
+        </div>
+    </div>
+    <div ng-show="model.successMessageDelEmployee">
+        <div class="alert alert-danger">
+            <strong>Success!</strong> Removed {{model.delEmployeeName}} from the database.
+        </div>
+    </div>
+
   <h1>Test</h1>
 
-  <input type="text" ng-model="model.queryType">
+  <h3>For employee procedure</h3>
+  <form>
+      <label>Name: <input type="text" ng-change="model.resetMessages()" ng-model="model.employeeName" /></label><br />
+      <label>Salary: <input type="number" ng-change="model.resetMessages()" ng-model="model.employeeSalary" /></label><br />
+      Role: <label><input type="radio" ng-change="model.resetMessages()"
+                          ng-model="model.employeeRole" value="Manager" />Manager</label>
+      <label><input type="radio"  ng-change="model.resetMessages()"
+                    ng-model="model.employeeRole" value="Keeper" />Keeper</label>
+      <label><input type="radio"  ng-change="model.resetMessages()"
+                    ng-model="model.employeeRole" value="Veterinarian" />Veterinarian</label><br />
+  </form>
+    <button class="btn btn-block btn-primary" ng-click="model.addEmployee()"> Add</button>
+
+
+
+  <input type="text" ng-model="model.delEmployeeName" placeholder="Input employee name"
+         ng-change="model.resetMessages()">
+    <button class="btn btn-block btn-danger" ng-click="model.delEmployee()"> Remove</button>
+  <h3>For SELECT Query</h3>
+  <input type="text" ng-model="model.queryType" placeholder="Input table name">
 
   <button class="btn btn-block btn-primary" ng-click="model.postQuery()"> Get</button>
   <div class="rows">
@@ -17,7 +48,7 @@
       <div ng-show="model.data_server.length == 0"  >
         <div class="alert alert-info" >
           <p class="text-center" >
-            Sorry, Right now we don't have any results for you.
+            Sorry, no results
           </p >
         </div >
       </div >

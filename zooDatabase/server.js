@@ -26,7 +26,7 @@ app.use(require("express").static('data'));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "xci18783",
+    password: "###",
     database: "zoo"
 });
 
@@ -51,6 +51,36 @@ app.post('/get_data', function (req, res) {
                 res.write(JSON.stringify(rows));
                 res.end();
             }
+        } else {
+            console.log("Query failed");
+        }
+    });
+});
+
+app.post('/addEmployee', function (req, res) {
+   var name = req.body['name'];
+   var salary = req.body['salary'];
+   var role = req.body['role'];
+   var query = "CALL addEmployee('"+ name + "', "+ salary + ", '" + role +"');";
+    con.query(String(query),function(err,rows){
+        //con.close();
+        if(!err) {
+            res.write("true");
+            res.end();
+        } else {
+            console.log("Query failed");
+        }
+    });
+});
+
+app.post('/delEmployee', function (req, res) {
+    var name = req.body['name'];
+    var query = "CALL removeEmployee('"+ name + "');";
+    con.query(String(query),function(err,rows){
+        //con.close();
+        if(!err) {
+            res.write("true");
+            res.end();
         } else {
             console.log("Query failed");
         }

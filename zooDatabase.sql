@@ -115,6 +115,25 @@ CREATE TABLE IF NOT EXISTS recomendations (
 
 
 -- -----------------------------------------------------
+-- Procedures
+-- -----------------------------------------------------
+
+
+DELIMITER // 
+
+create procedure addEmployee(
+eName varchar(45)
+)
+
+begin
+ insert into employee(name)
+ values (eName);
+end //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
 -- Triggers
 -- -----------------------------------------------------
 #
@@ -146,13 +165,14 @@ INSERT INTO employee (name, salary, role) VALUE ("Test", 1, 'Manager');
 INSERT INTO location (name) VALUE ("test2");
 
 INSERT INTO exhibit (idEnvironment, openingTime, closingTime, numOfAnimals, employeeId, idLocation, description) 
-VALUE (1, NOW(), NOW(), 0, 1, 1, "exhibit");
+VALUE (2, NOW(), NOW(), 0, 2, 2, "exhibit");
 
 INSERT INTO species (diet, preferredClimate, name) VALUE ("tes","est","est1");
 
-INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (1, NOW());
+INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (2, NOW());
 
-INSERT INTO animal (idSpeciesAn, idMedicalHistoryAn, animalName, perfoms, idExhibitAn) VALUE (1,1,"test",FALSE,2);
+INSERT INTO animal (idSpeciesAn, idMedicalHistoryAn, animalName, perfoms, idExhibitAn) VALUE (2,5,"test",FALSE,7);
 
 #DELETE FROM animal WHERE idAnimal = 5;
 
+SELECT * FROM exhibit;
