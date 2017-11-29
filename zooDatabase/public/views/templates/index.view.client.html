@@ -1,0 +1,27 @@
+<head>
+  <title>Connecting Node.js app to MySql</title>
+</head>
+<body>
+<div class="container-fluid">
+  <h1>Test</h1>
+
+  <input type="text" ng-model="model.queryType">
+
+  <button class="btn btn-block btn-primary" ng-click="model.postQuery()"> Get</button>
+  <div class="rows">
+    <div class="col-md-12">
+      <div ng-repeat="data in model.data_server">
+        {{ data }}
+        <hr/>
+      </div>
+      <div ng-show="model.data_server.length == 0"  >
+        <div class="alert alert-info" >
+          <p class="text-center" >
+            Sorry, Right now we don't have any results for you.
+          </p >
+        </div >
+      </div >
+    </div>
+  </div>
+</div>
+</body>
