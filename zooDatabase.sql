@@ -29,20 +29,12 @@ CREATE TABLE IF NOT EXISTS species (
 -- Table employee
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS employee (
-<<<<<<< HEAD
-  idEmployee INT NOT NULL,
-  empName VARCHAR(45) NOT NULL,
-  salary INT NULL,
-  role ENUM('Manager', 'Keeper', 'Veterinarian') NULL,
-  PRIMARY KEY (idEmployee),
-  UNIQUE INDEX idEmployee_UNIQUE (idEmployee ASC));
-=======
   idEmployee INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45),
+  empName VARCHAR(45) NOT NULL,
   salary INT,
   role ENUM('Manager', 'Keeper', 'Veterinarian'),
-  PRIMARY KEY (idEmployee));
->>>>>>> master
+  PRIMARY KEY (idEmployee),
+  UNIQUE INDEX idEmployee_UNIQUE (idEmployee ASC));
 
 
 -- -----------------------------------------------------
@@ -58,26 +50,15 @@ CREATE TABLE IF NOT EXISTS location (
 -- Table exhibit
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS exhibit (
-<<<<<<< HEAD
-  idExhibit INT NOT NULL,
-  exhibitName varchar(45) not null,
-  idEnvironment INT NULL,
-  openingTime DATE NULL,
-  closingTime DATE NULL,
-  numOfAnimals INT default 0,
-  employeeId INT NULL,
-  idLocation INT NULL,
-  description VARCHAR(45) NULL,
-=======
   idExhibit INT NOT NULL AUTO_INCREMENT,
+  exhibitName varchar(45) not null,
   idEnvironment INT,
   openingTime DATE,
   closingTime DATE,
-  numOfAnimals INT NOT NULL,
+  numOfAnimals INT default 0,
   employeeId INT,
   idLocation INT,
   description VARCHAR(45),
->>>>>>> master
   PRIMARY KEY (idExhibit),
   CONSTRAINT idEnvironment
     FOREIGN KEY (idEnvironment)
@@ -135,8 +116,6 @@ CREATE TABLE IF NOT EXISTS recomendations (
     FOREIGN KEY (idmedicalHistory)
     REFERENCES medicalHistory (idmedicalHistory));
 
-
-<<<<<<< HEAD
 -- -----------------------------------------------------
 -- Procedures for reading operations
 -- -----------------------------------------------------
@@ -209,7 +188,38 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- update Foreign key objects
 -- -----------------------------------------------------
-=======
+
+-- add given animal to an exhibit
+/*
+drop procedure if exists addToExhibit;
+
+DELIMITER //
+
+create procedure addToExhibit(
+aID int)
+begin
+
+update 
+end //
+
+DELIMITER ;
+*/
+
+drop procedure if exists updateEmployee;
+
+DELIMITER //
+
+create procedure updateEmployee(
+eName varchar(45), eSalary int, eRole varchar(45), idE int)
+
+begin
+update employee
+set empName = eName, salary = eSalary, role = eRole
+where idEmployee = idE;
+end //
+
+DELIMITER ;
+
 
 -- -----------------------------------------------------
 -- Triggers
@@ -238,19 +248,67 @@ DELIMITER ;
 
 SET SQL_SAFE_UPDATES = 0;
 
-INSERT INTO environment (name,temperature,foliage) VALUE ("test",1,"test1");
-INSERT INTO employee (name, salary, role) VALUE ("Test", 1, 'Manager');
-INSERT INTO location (name) VALUE ("test2");
+-- -----------------------------------------------------
+-- Sample Data
+-- -----------------------------------------------------
 
-INSERT INTO exhibit (idEnvironment, openingTime, closingTime, numOfAnimals, employeeId, idLocation, description) 
-VALUE (1, NOW(), NOW(), 0, 1, 1, "exhibit");
+-- exhibits
+INSERT INTO exhibit (idExhibit, exhibitName, openingTime, closingTime)
+values (1, 'Amazon', 8, 5);
 
-INSERT INTO species (diet, preferredClimate, name) VALUE ("tes","est","est1");
+INSERT INTO exhibit (idExhibit, exhibitName, openingTime, closingTime)
+values (2, 'Safari', 8, 5);
 
-INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (1, NOW());
+INSERT INTO exhibit (idExhibit, exhibitName, openingTime, closingTime)
+values (3, 'Arctic', 8, 5);
 
-INSERT INTO animal (idSpeciesAn, idMedicalHistoryAn, animalName, perfoms, idExhibitAn) VALUE (1,1,"test",FALSE,2);
+-- environment
+INSERT INTO environment (name,temperature,foliage) 
+VALUES('Forest', 75, 'tropical');
+
+INSERT INTO environment (name,temperature,foliage) 
+VALUES('Flatlands', 65, 'Desert');
+
+INSERT INTO environment (name,temperature,foliage) 
+VALUES('Icelands', 10, 'Arid');
+
+-- employees
+INSERT INTO employee (idEmployee, name, salary, role) 
+VALUES (0001, 'Alice', 67000, 'Manager');
+
+INSERT INTO employee (idEmployee, name, salary, role) 
+VALUES (1001, 'Bob', 54000, 'Keeper');
+INSERT INTO employee (idEmployee, name, salary, role) 
+VALUES (1002, 'Claire', 54000, 'Keeper');
+
+INSERT INTO employee (idEmployee, name, salary, role) 
+VALUES (2001, 'Alex', 75000, 'Veterinarian');
+
+
+-- locations
+INSERT INTO location (name) VALUES ('Monkey');
+INSERT INTO location (name) VALUES ('Felines');
+INSERT INTO location (name) VALUES ('Arctic');
+
+-- species
+INSERT INTO species (idSpecies, diet, preferredClimate, name) 
+VALUES (1, 'fruits','savannah','baboon');
+INSERT INTO species (diet, preferredClimate, name) 
+VALUES (2, 'insects','tropics','toucan');
+INSERT INTO species (diet, preferredClimate, name) 
+VALUES (3, 'fish','polar','penguin');
+
+-- med History
+INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (2001, 10/11/2017);
+
+-- animals 
+
+INSERT INTO animal (idSpeciesAn, animalName, perfoms, idExhibitAn)
+VALUE (1,'bobo', TRUE, 2);
+INSERT INTO animal (idSpeciesAn, animalName, perfoms, idExhibitAn)
+VALUE (2,'Tony', FALSE, 1);
+INSERT INTO animal (idSpeciesAn, animalName, perfoms, idExhibitAn)
+VALUE (3,'Pearl', FALSE, 3);
 
 #DELETE FROM animal WHERE idAnimal = 5;
 
->>>>>>> master
