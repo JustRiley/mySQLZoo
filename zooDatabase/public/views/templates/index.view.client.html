@@ -2,8 +2,14 @@
   <title>MySQL zoo</title>
 </head>
 <body>
+
 <div class="container-fluid">
 
+    <div ng-show="model.successMessageUpdateEmployee">
+        <div class="alert alert-warning">
+            <strong>Success!</strong> Updated {{model.employeeName}} in the database.
+        </div>
+    </div>
     <div ng-show="model.successMessageEmployee">
         <div class="alert alert-success">
             <strong>Success!</strong> Added {{model.employeeName}} to the database.
@@ -37,7 +43,8 @@
       <label><input type="radio"  ng-change="model.resetMessages()"
                     ng-model="model.employeeRole" value="Veterinarian" />Veterinarian</label><br />
   </form><br />
-    <button class="btn btn-primary" ng-click="model.addEmployee()"> Add</button><br />
+    <button class="btn btn-primary" ng-click="model.addEmployee()"> Add</button>
+    <button class="btn btn-warning" ng-click="model.updateEmployee()"> Update</button><br />
 
 
 
@@ -76,7 +83,9 @@
   <div class="rows">
     <div class="col-md-12">
       <div ng-repeat="data in model.data_server">
-        {{ data }}
+          <pre>
+              {{ data | json }}
+          </pre>
         <hr/>
       </div>
       <div ng-show="model.data_server.length == 0"  >

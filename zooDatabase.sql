@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS location (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS exhibit (
   idExhibit INT NOT NULL AUTO_INCREMENT,
+  exhibitName VARCHAR(45),
   idEnvironment INT,
   openingTime DATE,
   closingTime DATE,
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS medicalHistory (
   CONSTRAINT idVet
     FOREIGN KEY (idVet)
     REFERENCES employee (idEmployee));
+
 
 -- -----------------------------------------------------
 -- Table animal
@@ -118,6 +120,8 @@ CREATE TABLE IF NOT EXISTS recomendations (
 -- Procedures
 -- -----------------------------------------------------
 
+
+
 DELIMITER // 
 
 create procedure addEmployee(
@@ -144,8 +148,31 @@ end //
 
 DELIMITER ;
 
-SELECT * FROM employee;
-CALL removeEmployee('Ted');
+DELIMITER // 
+
+create procedure addAnimal(
+aName varchar(45), speciesKey INT, medicalHistKey INT, exhibitKey INT, performs BOOLEAN)
+
+begin
+ insert into animal(animalName, idSpeciesAn, idMedicalHistoryAn, idExhibitAn, performs)
+ values (aName, speciesKey, medicalHistKey, exhibitKey, performs);
+end //
+
+DELIMITER ;
+
+
+DELIMITER // 
+
+create procedure removeAnimal(
+aName varchar(45)
+)
+
+begin
+ DELETE FROM animal WHERE animalName LIKE aName;
+end //
+
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- Triggers
 -- -----------------------------------------------------
@@ -171,21 +198,81 @@ CREATE TRIGGER dec_num_animals AFTER DELETE ON animal
 DELIMITER ;
 
 
+DELIMITER //
+
+create procedure updateEmployee(
+eName varchar(45), eSalary int, eRole ENUM('Manager', 'Keeper', 'Veterinarian'))
+
+begin
+update employee
+set name = eName, salary = eSalary, role = eRole
+where name = eName;
+end //
+
+DELIMITER ;
+
+
 SET SQL_SAFE_UPDATES = 0;
 
-INSERT INTO environment (name,temperature,foliage) VALUE ("test",1,"test1");
-INSERT INTO employee (name, salary, role) VALUE ("Test", 1, 'Manager');
-INSERT INTO location (name) VALUE ("test2");
 
-INSERT INTO exhibit (idEnvironment, openingTime, closingTime, numOfAnimals, employeeId, idLocation, description) 
-VALUE (2, NOW(), NOW(), 0, 2, 2, "exhibit");
 
-INSERT INTO species (diet, preferredClimate, name) VALUE ("tes","est","est1");
+-- environment
+INSERT INTO environment (name,temperature,foliage) 
+VALUES('Forest', 75, 'tropical');
 
-INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (2, NOW());
+INSERT INTO environment (name,temperature,foliage) 
+VALUES('Flatlands', 65, 'Desert');
 
-INSERT INTO animal (idSpeciesAn, idMedicalHistoryAn, animalName, perfoms, idExhibitAn) VALUE (2,5,"test",FALSE,7);
+INSERT INTO environment (name,temperature,foliage) 
+VALUES('Icelands', 10, 'Arid');
 
-#DELETE FROM animal WHERE idAnimal = 5;
+-- employees
+INSERT INTO employee (name, salary, role) 
+VALUES ('Alice', 67000, 'Manager');
 
-SELECT * FROM exhibit;
+INSERT INTO employee (name, salary, role) 
+VALUES ('Bob', 54000, 'Keeper');
+INSERT INTO employee (name, salary, role) 
+VALUES ('Claire', 54000, 'Keeper');
+
+INSERT INTO employee (name, salary, role) 
+VALUES ('Alex', 75000, 'Veterinarian');
+
+
+-- locations
+INSERT INTO location (name) VALUES ('Monkey');
+INSERT INTO location (name) VALUES ('Felines');
+INSERT INTO location (name) VALUES ('Arctic');
+
+-- species
+INSERT INTO species (diet, preferredClimate, name) 
+VALUES ('fruits','savannah','baboon');
+INSERT INTO species (diet, preferredClimate, name) 
+VALUES ('insects','tropics','toucan');
+INSERT INTO species (diet, preferredClimate, name) 
+VALUES ('fish','polar','penguin');
+
+-- med History
+INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (1, 10/11/2017);
+
+
+-- exhibits
+INSERT INTO exhibit (exhibitName, openingTime, closingTime, numOfAnimals, employeeId, idLocation, description)
+values ('Amazon', NOW(), NOW(), 0, 1, 1, 'Forest');
+
+INSERT INTO exhibit (exhibitName, openingTime, closingTime, numOfAnimals, employeeId, idLocation, description)
+values ('Safari', NOW(), NOW(), 0, 1, 1, 'Plains');
+
+INSERT INTO exhibit (exhibitName, openingTime, closingTime, numOfAnimals, employeeId, idLocation, description)
+values ('Arctic', NOW(), NOW(), 0, 1,1, 'Icy');
+
+
+-- animals 
+
+INSERT INTO animal (idSpeciesAn, animalName, performs, idExhibitAn, idMedicalHistoryAn)
+VALUE (1,'bobo', TRUE, 2, 1);
+INSERT INTO animal (idSpeciesAn, animalName, performs, idExhibitAn, idMedicalHistoryAn)
+VALUE (2,'Tony', FALSE, 1, 1);
+INSERT INTO animal (idSpeciesAn, animalName, performs, idExhibitAn, idMedicalHistoryAn)
+VALUE (3,'Pearl', FALSE, 3, 1);
+

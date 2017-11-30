@@ -73,6 +73,24 @@ app.post('/addEmployee', function (req, res) {
     });
 });
 
+
+
+app.post('/updateEmployee', function (req, res) {
+    var name = req.body['name'];
+    var salary = req.body['salary'];
+    var role = req.body['role'];
+    var query = "CALL updateEmployee('"+ name + "', "+ salary + ", '" + role +"');";
+    con.query(String(query),function(err,rows){
+        //con.close();
+        if(!err) {
+            res.write("true");
+            res.end();
+        } else {
+            console.log("Query failed");
+        }
+    });
+});
+
 app.post('/addAnimal', function (req, res) {
     var name = req.body['name'];
     var speciesKey = req.body['speciesKey'];
@@ -123,6 +141,7 @@ app.post('/delEmployee', function (req, res) {
         }
     });
 });
+
 
 http.listen(8080,function(){
     console.log("Listening on http://127.0.0.1:8080/");
