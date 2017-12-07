@@ -26,7 +26,7 @@ app.use(require("express").static('data'));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "###",
+    password: "xci18783",
     database: "zoo"
 });
 
