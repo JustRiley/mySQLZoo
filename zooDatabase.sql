@@ -1,4 +1,6 @@
 ##Zoo database
+drop database if exists zoo;
+
 CREATE DATABASE zoo;
 
 USE zoo;
@@ -27,11 +29,20 @@ CREATE TABLE IF NOT EXISTS species (
 -- Table employee
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS employee (
+<<<<<<< HEAD
+  idEmployee INT NOT NULL,
+  empName VARCHAR(45) NOT NULL,
+  salary INT NULL,
+  role ENUM('Manager', 'Keeper', 'Veterinarian') NULL,
+  PRIMARY KEY (idEmployee),
+  UNIQUE INDEX idEmployee_UNIQUE (idEmployee ASC));
+=======
   idEmployee INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(45),
   salary INT,
   role ENUM('Manager', 'Keeper', 'Veterinarian'),
   PRIMARY KEY (idEmployee));
+>>>>>>> master
 
 
 -- -----------------------------------------------------
@@ -47,6 +58,17 @@ CREATE TABLE IF NOT EXISTS location (
 -- Table exhibit
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS exhibit (
+<<<<<<< HEAD
+  idExhibit INT NOT NULL,
+  exhibitName varchar(45) not null,
+  idEnvironment INT NULL,
+  openingTime DATE NULL,
+  closingTime DATE NULL,
+  numOfAnimals INT default 0,
+  employeeId INT NULL,
+  idLocation INT NULL,
+  description VARCHAR(45) NULL,
+=======
   idExhibit INT NOT NULL AUTO_INCREMENT,
   exhibitName VARCHAR(45),
   idEnvironment INT,
@@ -56,6 +78,7 @@ CREATE TABLE IF NOT EXISTS exhibit (
   employeeId INT,
   idLocation INT,
   description VARCHAR(45),
+>>>>>>> master
   PRIMARY KEY (idExhibit),
   CONSTRAINT idEnvironment
     FOREIGN KEY (idEnvironment)
@@ -115,6 +138,80 @@ CREATE TABLE IF NOT EXISTS recomendations (
     REFERENCES medicalHistory (idmedicalHistory));
 
 
+<<<<<<< HEAD
+-- -----------------------------------------------------
+-- Procedures for reading operations
+-- -----------------------------------------------------
+drop procedure if exists getMedical;
+
+DELIMITER //
+
+create procedure getMedical()
+begin
+
+-- select 
+
+end //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Insert new elements into tables
+-- -----------------------------------------------------
+drop procedure if exists addAnimal;
+
+DELIMITER // 
+
+create procedure addAnimal(
+idA int,
+aName varchar(45)
+)
+
+begin
+ insert into animal(idAnimal, animalName)
+ values (idA, aName);
+end //
+
+DELIMITER ;
+
+drop procedure if exists addExhibit;
+
+DELIMITER // 
+
+create procedure addExhibit(
+idE int,
+eName varchar(45)
+)
+
+begin
+ insert into exhibit(idExhibit, exhibitName)
+ values (idE, eName);
+end //
+
+DELIMITER ;
+
+
+drop procedure if exists addEmployee;
+
+DELIMITER // 
+
+create procedure addEmployee(
+idE int,
+eName varchar(45)
+)
+
+begin
+ insert into employee(idEmployee, empName)
+ values (idE, eName);
+end //
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- update Foreign key objects
+-- -----------------------------------------------------
+=======
 
 -- -----------------------------------------------------
 -- Procedures
@@ -276,3 +373,4 @@ VALUE (2,'Tony', FALSE, 1, 1);
 INSERT INTO animal (idSpeciesAn, animalName, performs, idExhibitAn, idMedicalHistoryAn)
 VALUE (3,'Pearl', FALSE, 3, 1);
 
+>>>>>>> master
