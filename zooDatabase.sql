@@ -185,6 +185,52 @@ end //
 
 DELIMITER ;
 
+drop procedure if exists addEnvironment;
+
+DELIMITER // 
+
+create procedure addEnviornment(
+enviName varchar(45),
+temp int,
+envioFoliage varchar(45)
+)
+
+begin
+ insert into environment(name, temperature, foliage)
+ values (enviName, temp, enviFoliage);
+end //
+
+DELIMITER ;
+
+drop procedure if exists removeEmp
+
+DELIMITER //
+ 
+create procedure removeEmp(
+eName varchar(45)
+)
+
+begin
+ DELETE FROM employee WHERE empName LIKE eName;
+end //
+
+DELIMITER ;
+
+drop procedure if exists removeEmp
+
+DELIMITER //
+ 
+create procedure removeEnvironment(
+eName varchar(45)
+)
+
+begin
+ DELETE FROM environment WHERE name LIKE eName;
+end //
+
+DELIMITER ;
+
+
 -- -----------------------------------------------------
 -- update Foreign key objects
 -- -----------------------------------------------------
