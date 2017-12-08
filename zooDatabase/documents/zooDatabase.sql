@@ -254,7 +254,7 @@ INSERT INTO species (diet, preferredClimate, name)
 VALUES ('fish','polar','penguin');
 
 -- med History
-INSERT INTO medicalhistory (idVet, lastCheckUp) VALUE (1, 10/11/2017);
+INSERT INTO medicalHistory (idVet, lastCheckUp) VALUE (1, 10/11/2017);
 
 
 -- exhibits
