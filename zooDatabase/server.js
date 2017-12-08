@@ -23,12 +23,24 @@ app.listen(port);
 
 app.use(require("express").static('data'));
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "xci18783",
-    database: "zoo"
-});
+if(process.env.DB_USERNAME && process.env.DB_PASSWORD) {
+    console.log("Running remotely");
+    var con = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE
+    });
+}
+else {
+    console.log("Running locally");
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "###",
+        database: "zoo"
+    });
+}
 
 
 app.get("/",function(req,res){
