@@ -294,6 +294,37 @@ DELIMITER ;
 
 SET SQL_SAFE_UPDATES = 0;
 
+
+drop trigger if exists pref_climate
+
+DELIMITER //
+
+CREATE trigger pref_climate 
+AFTER update ON animal
+for each row
+begin
+-- if 
+-- end if;
+end //
+DELIMITER ;
+
+
+drop trigger if exists recieved_shot
+
+DELIMITER //
+
+create trigger recieved_shot 
+after update on medicalhistory
+for each row
+begin 
+if(datediff(old.lastCheckUp, new.lastCheckUp) < 90)
+then 
+set message_text = 'recieved needed shots!';
+end if;
+end //
+DELIMITER ;
+
+
 -- -----------------------------------------------------
 -- Sample Data
 -- -----------------------------------------------------
