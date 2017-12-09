@@ -12,6 +12,7 @@
         model.addAnimal = addAnimal;
         model.delAnimal = delAnimal;
         model.updateEmployee = updateEmployee;
+        model.updateMedical = updateMedical;
         model.queryType ="";
         model.delEmployeeName ="";
         model.employeeName ="";
@@ -22,14 +23,30 @@
         model.successMessageAnimal = false;
         model.successMessageDelAnimal = false;
         model.successMessageUpdateEmployee = false;
+        model.successMessageUpdateMedical = false;
         model.animalName="";
         model.speciesKey=0;
         model.medicalHistKey=0;
         model.animalPerform=false;
         model.exhibitKey=0;
         model.delAnimalName="";
+        model.medicalId=0;
+        model.medicalDate="";
 
 
+
+        function updateMedical() {
+            var postObj = {
+                id: model.medicalId,
+                date: model.medicalDate
+            };
+            $http.post('updateMedical', postObj)
+                .then(function (success){
+                    model.successMessageUpdateMedical=success;
+                }, function (error){
+                    alert("connection error");
+                });
+        }
 
         function updateEmployee() {
             var postObj = {
@@ -50,6 +67,7 @@
             model.successMessageAnimal = false;
             model.successMessageDelAnimal = false;
             model.successMessageUpdateEmployee = false;
+            model.successMessageUpdateMedical = false;
         }
 
         function delEmployee() {

@@ -154,6 +154,21 @@ app.post('/delEmployee', function (req, res) {
     });
 });
 
+app.post('/updateMedical', function (req, res){
+   var id = req.body['id'];
+   var date = req.body['date'];
+   var query = "CALL updateMedicalHistory("+ id+", " + date +");";
+   con.query(String(query), function(err,rows){
+       if(!err) {
+           res.write("true");
+           res.end();
+       }
+       else {
+           console.log("Query failed");
+       }
+   })
+});
+
 
 http.listen(8080,function(){
     console.log("Listening on http://127.0.0.1:8080/");
