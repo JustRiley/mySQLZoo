@@ -157,7 +157,7 @@ app.post('/delEmployee', function (req, res) {
 app.post('/updateMedical', function (req, res){
    var id = req.body['id'];
    var date = req.body['date'];
-   var query = "CALL updatemedicalHistory("+ id+", " + date +");";
+   var query = "CALL updatemedicalHistory("+ id+", '" + date +"');";
    con.query(String(query), function(err,rows){
        if(!err) {
            res.write("true");
