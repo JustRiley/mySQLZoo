@@ -36,8 +36,11 @@ Procedures
 * Add exhibit
 * Add environment
 * Add animal
+* Update employee
+* Update medicalHistory
+* Remove employee
+* Remove animal
 Triggers
 * inc_num _animals
 * Dec_num_animals
-* Pref_climate
 * shot_status
