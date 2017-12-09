@@ -40,7 +40,7 @@
                 id: model.medicalId,
                 date: model.medicalDate
             };
-            $http.post('updateMedical', postObj)
+            $http.post('/updateMedical', postObj)
                 .then(function (success){
                     model.successMessageUpdateMedical=success;
                 }, function (error){
