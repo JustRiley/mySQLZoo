@@ -303,13 +303,13 @@ CREATE trigger pref_climate
 AFTER update ON animal
 for each row
 begin
--- if 
+-- if (old.idSpecies
 -- end if;
 end //
 DELIMITER ;
 
 
-drop trigger if exists recieved_shot
+drop trigger if exists shot_status
 
 DELIMITER //
 
@@ -317,9 +317,11 @@ create trigger recieved_shot
 after update on medicalhistory
 for each row
 begin 
-if(datediff(old.lastCheckUp, new.lastCheckUp) < 90)
+if(datediff(old.lastCheckUp, new.lastCheckUp) <= 90)
 then 
-set message_text = 'recieved needed shots!';
+set message_text = 'recieved all needed shots!';
+else
+set message_text = 'needs some medications';
 end if;
 end //
 DELIMITER ;
