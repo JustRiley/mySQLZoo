@@ -215,7 +215,34 @@ DELIMITER ;
 
 SET SQL_SAFE_UPDATES = 0;
 
+DELIMITER //
 
+create trigger recieved_shot
+after update on medicalHistory
+for each row
+begin 
+declare message_text varchar(50);
+if(datediff(old.lastCheckUp, new.lastCheckUp) <= 90)
+then 
+UPDATE recomendations SET recomendations.recomendation = 'recieved all needed shots!' WHERE recomendations.idmedicalHistory = OLD.idmedicalHistory;
+else
+UPDATE recomendations SET recomendations.recomendation = 'needs some medications' WHERE recomendations.idmedicalHistory = OLD.idmedicalHistory;
+end if;
+end //
+DELIMITER ;
+
+DELIMITER //
+
+create procedure updatemedicalHistory(
+idmedicalHistorya INT, lastCheckUpa DATE)
+
+begin
+update medicalHistory
+set lastCheckUp = lastCheckUpa
+where idmedicalHistory = idmedicalHistorya;
+end //
+
+DELIMITER ;
 
 -- environment
 INSERT INTO environment (name,temperature,foliage) 
