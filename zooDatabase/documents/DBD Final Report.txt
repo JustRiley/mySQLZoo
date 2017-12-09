@@ -1,0 +1,43 @@
+﻿Technical ​​Specifications:
+Languages:​​ Javascript,​​ SQL
+Web​​framework:​​Angular​​v.5/Node.js​ v.4,​Express
+Host Server: Heroku 
+​Database:​​MySQL
+
+
+Final EER Diagram:
+  
+
+Final Flowchart
+  
+
+Lessons Learned
+1. Ability to connect a frontend and backend framework to a database, 
+2. Despite having different schedules delegating tasks for each member to do.
+3. Adding the foreign key of the animal to more tables.
+4. n/a
+
+
+Future work
+1. Use for better exploration at the zoo
+2. Possibility of linking database to an API of a real zoo , such as the local Franklin Park Zoo
+
+
+Contributions
+Justin - added meaningful input for the database design, Made the front end through angular, hooked up database to heroku server host, initialized tables, taught partner how to use github
+
+
+Prisca- added meaningful input for the database design, made triggers, made procedures, created sample data, final report write up
+
+
+Our procedures, triggers, functions, transactions, error handling
+Procedures
+* Add employee
+* Add exhibit
+* Add environment
+* Add animal
+Triggers
+* inc_num _animals
+* Dec_num_animals
+* Pref_climate
+* shot_status
